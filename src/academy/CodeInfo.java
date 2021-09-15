@@ -16,13 +16,24 @@ public interface CodeInfo {
     final static int PRINTOUT_STUDENT = 101;
     final static int PRINTOUT_TEACHER = 102;
     final static int PRINTOUT_ALL = 103;
-
-
+    final static int INSERT_STUDENT = 201;
+    final static int INSERT_TEACHER = 202;
+    final static int INSERT_BACK = 203;
     final static int MODI_NAME = 301;
     final static int MODI_AGE = 302;
     final static int MODI_ADDR = 303;
     final static int MODI_TEL = 304;
     final static int MODI_EMAIL = 305;
+    final static int SEARCH_NAME = 401;
+    final static int SEARCH_AGE = 402;
+    final static int SEARCH_ADDR = 403;
+    final static int SEARCH_UNIQUE = 404;
+    final static int SEARCH_TEL = 405;
+    final static int SEARCH_EMAIL = 406;
+
+
+
+
 
 //    final static int GO_BACK = 4;
 //    final static int EXIT = 5;

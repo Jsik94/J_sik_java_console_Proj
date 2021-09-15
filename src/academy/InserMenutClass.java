@@ -6,13 +6,7 @@ import java.util.Map;
 public class InserMenutClass implements Actionable,CodeInfo{
     final static private String TITLE = "입력";
     final static int[] MENUOPTS = new int[]{1,2,3,4};
-    final static int INSERT_STUDENT = 1;
-    final static int INSERT_TEACHER = 2;
-    final static int GO_BACK = 3;
-    final static int EXIT = 4;
-    final static private int MOVE_EXIT = 999;
-    final static private int COMPLETE = 998;
-    final static private int CURRENT = 997;
+
 
 
     InputClass inputClass ;
@@ -40,17 +34,17 @@ public class InserMenutClass implements Actionable,CodeInfo{
             show();
             int result = inputClass.getSubMenuInput(MENUOPTS);
             int request_code = 0 ;
-            switch (result){
+            switch (result+200){
                 case INSERT_STUDENT:
                     request_code =insert(INSERT_STUDENT);
                     break;
                 case INSERT_TEACHER:
                     request_code =insert(INSERT_TEACHER);
                     break;
-                case GO_BACK:
+                case INSERT_BACK:
                     request_code = COMPLETE;
                     break;
-                case EXIT:
+                case MOVE_EXIT:
                     return MOVE_EXIT;
             }
 

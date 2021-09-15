@@ -14,6 +14,18 @@ public class Teacher extends Person{
         return subject;
     }
 
+    @Override
+    public boolean contains(String target) {
+         if(super.contains(target)){
+            return true;
+         }
+
+         if (subject.equals(target)){
+            return true;
+        }
+         return false;
+    }
+
     static class TeacherBuilder {
         private int age;
         private String name;
@@ -44,6 +56,8 @@ public class Teacher extends Person{
             this.email = email;
             return this;
         }
+
+
 
         public Teacher build(){
             return new Teacher(this);

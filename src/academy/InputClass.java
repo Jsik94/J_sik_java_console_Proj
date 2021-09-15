@@ -118,6 +118,13 @@ public class InputClass {
         return result;
     }
 
+    public String getOrigin(){
+        sc = new Scanner(System.in);
+        String data = sc.nextLine().trim();
+
+        return data;
+    }
+
     public boolean getYorN() {
         int data = 0;
         while(true){

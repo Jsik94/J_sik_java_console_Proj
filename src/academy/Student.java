@@ -15,6 +15,18 @@ public class Student extends Person{
         return strNumber;
     }
 
+    @Override
+    public boolean contains(String target) {
+        if(super.contains(target)){
+
+            return true;
+        }
+        if (strNumber.equals(target)){
+            return true;
+        }
+        return false;
+    }
+
     static class StudentBuilder {
         private int age;
         private String name;

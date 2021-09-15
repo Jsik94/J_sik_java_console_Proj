@@ -12,6 +12,8 @@ public class Person {
     private String tel;
     private String email;
 
+
+
     public Person(int age, String name, String addr, String tel, String email) {
         this.age = age;
         this.name = name;
@@ -22,6 +24,26 @@ public class Person {
 
     public int getInfo_cnt() {
         return info_cnt;
+    }
+
+    public boolean contains(String target){
+        if(name.equals(target)){
+            return true;
+        }else if(addr.equals(target)){
+            return true;
+        }else if(tel.equals(target)){
+            return true;
+        }else if(email.equals(target)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean contains(int target){
+        if(age==target){
+            return true;
+        }
+        return false;
     }
 
     public String getTel() {
