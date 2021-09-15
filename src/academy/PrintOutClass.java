@@ -2,7 +2,7 @@ package academy;
 
 import java.util.*;
 
-public class PrintOutClass implements Actionable {
+public class PrintOutClass implements Actionable ,CodeInfo{
     /*
      * 분리 예정
      * idea 1
@@ -11,15 +11,10 @@ public class PrintOutClass implements Actionable {
      *
      */
 
-    final static int[] OPTS = new int[]{1, 2, 3, 4,5};
-    final static int INSERT_STUDENT = 1;
-    final static int INSERT_TEACHER = 2;
-    final static int INSERT_ALL = 3;
-    final static int GO_BACK = 4;
-    final static int EXIT = 5;
-    final static private int MOVE_EXIT = 999;
-    final static private int COMPLETE = 998;
-    final static private int CURRENT = 997;
+    final static int[] MENUOPTS = new int[]{1, 2, 3, 4,5};
+    final static int GO_BACK = 104;
+    final static int EXIT = 105;
+
 
 
     InputClass inputClass;
@@ -48,18 +43,18 @@ public class PrintOutClass implements Actionable {
     public int run() {
         while (true){
             show();
-            int result = inputClass.getSubMenuInput(OPTS);
+            int result = inputClass.getSubMenuInput(MENUOPTS);
             int request_code = 0;
 
-            switch (result) {
-                case INSERT_STUDENT:
-                    request_code= print(INSERT_STUDENT);
+            switch (result+100) {
+                case PRINTOUT_STUDENT:
+                    request_code= print(PRINTOUT_STUDENT);
                     break;
-                case INSERT_TEACHER:
-                    request_code= print(INSERT_TEACHER);
+                case PRINTOUT_TEACHER:
+                    request_code= print(PRINTOUT_TEACHER);
                     break;
-                case INSERT_ALL:
-                    request_code= print(INSERT_ALL);
+                case PRINTOUT_ALL:
+                    request_code= print(PRINTOUT_ALL);
                     break;
                 case GO_BACK:
                     request_code = COMPLETE;
@@ -89,10 +84,10 @@ public class PrintOutClass implements Actionable {
         StringBuilder sb = new StringBuilder();
         String unique = "전체";
         boolean student = true, teacher = true;
-        if(type == INSERT_STUDENT){
+        if(type == PRINTOUT_STUDENT){
             teacher = false;
             unique = "학번";
-        }else if(type == INSERT_TEACHER){
+        }else if(type == PRINTOUT_TEACHER){
             student = false;
             unique = "과목";
         }

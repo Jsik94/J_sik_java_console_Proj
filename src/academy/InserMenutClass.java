@@ -3,9 +3,9 @@ package academy;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class InserMenutClass implements Actionable {
-
-    final static int[] OPTS = new int[]{1,2,3,4};
+public class InserMenutClass implements Actionable,CodeInfo{
+    final static private String TITLE = "입력";
+    final static int[] MENUOPTS = new int[]{1,2,3,4};
     final static int INSERT_STUDENT = 1;
     final static int INSERT_TEACHER = 2;
     final static int GO_BACK = 3;
@@ -38,7 +38,7 @@ public class InserMenutClass implements Actionable {
         while (true){
 
             show();
-            int result = inputClass.getSubMenuInput(OPTS);
+            int result = inputClass.getSubMenuInput(MENUOPTS);
             int request_code = 0 ;
             switch (result){
                 case INSERT_STUDENT:

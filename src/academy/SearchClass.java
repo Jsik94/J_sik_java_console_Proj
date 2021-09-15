@@ -16,7 +16,7 @@ public class SearchClass extends SearchTool implements Actionable, CodeInfo {
 
         Person target = findPersonByName("검색");
         if (target == null) {
-            return GO_BACK;
+            return MOVE_PREV;
         }
 
         show();

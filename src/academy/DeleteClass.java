@@ -16,7 +16,7 @@ public class DeleteClass extends SearchTool implements Actionable,CodeInfo {
         Person target = findPersonByName(TITLE);
 
         if (target==null){
-            return GO_BACK;
+            return MOVE_PREV;
         }
         show();
         database.get(MyUtil.getTag(target.getName())).remove(target);

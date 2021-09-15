@@ -6,8 +6,7 @@ import java.util.Map;
 public class ModifyInfoClass extends SearchTool implements Actionable,CodeInfo {
     final static private String TITLE = "수정";
     final static private int[] MENUOPTS = new int[]{1,2,3,4,5,6};
-
-
+    final static int GO_BACK = 304;
 
     public ModifyInfoClass(Map<String,ArrayList<Person>> database) {
         super(database);
@@ -27,6 +26,7 @@ public class ModifyInfoClass extends SearchTool implements Actionable,CodeInfo {
         int result = ip.getMainMenuInput(MENUOPTS);
         split(result,target);
 
+        System.out.println("수정 되었습니다.");
         return COMPLETE;
     }
 

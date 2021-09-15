@@ -45,7 +45,7 @@ public class Academy implements CodeInfo {
 //    final static private int MOVE_SEARCH = 5;
 //    final static private int MOVE_EXIT = 999;
 //    final static private int MOVE_FIRST = 998;
-
+    final static private int[] MENUOPTS = new int[]{1, 2, 3, 4, 5, 9};
     Map<String,ArrayList<Person>> database ;
 
     InputClass inputClass;
@@ -53,12 +53,12 @@ public class Academy implements CodeInfo {
     public Academy() {
         database = new HashMap<>();
     }
+
     public Academy(int forTest) {
 
         System.out.println("<-------------- FOR DEBUG ----------------->");
         System.out.println("Constructor For Debug");
         this.database =new HashMap<>();
-
         database.put("ㅈ",new ArrayList<>());
         database.get("ㅈ").add(new Student.StudentBuilder(21,"정다식","23232").build());
         database.get("ㅈ").add(new Student.StudentBuilder(23,"정나식","23233").build());
@@ -75,18 +75,17 @@ public class Academy implements CodeInfo {
 
         boolean switch_toggle = true;
 
-
         while (switch_toggle) {
             //네비게이션 화면 출력
             ShowMainTemporary.getshow();
             //입력 값
             inputClass = new InputClass();
-            int[] menuOps = new int[]{1, 2, 3, 4, 5, 9};
-            int result = inputClass.getMainMenuInput(menuOps);
+
+            int result = inputClass.getMainMenuInput(MENUOPTS);
 
             Actionable spliter =null;
 
-            //입력값에 따른 흐름 분기
+            //입력값에 따른 흐름 분기 나중에 사용
             int request_code;
 
 

@@ -12,6 +12,9 @@ public class MyUtil {
 
     }
 
+    //static method
+
+    //confirm number
     static boolean isNumber(String value) {
         for (int i = 0; i < value.length(); i++) {
             if (!(value.codePointAt(i) >= '0' && value.codePointAt(i) <= '9'))
@@ -61,6 +64,7 @@ public class MyUtil {
         return false;
     }
 
+    //return 1st letter
     public static String getTag(String name) {
         //김길동->ㄱ,박길동->ㅂ,홍길동->ㅎ
         char[] jaeum = name.trim().toCharArray();
