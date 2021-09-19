@@ -23,7 +23,7 @@ public class ModifyInfoClass extends SearchTool implements Actionable,CodeInfo {
 
         database.get(MyUtil.getTag(target.getName())).remove(target);
 
-        int result = ip.getMainMenuInput(MENUOPTS);
+        int result = ip.getMenuInput(MENUOPTS);
         split(result,target);
 
         System.out.println("수정 되었습니다.");

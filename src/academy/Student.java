@@ -3,6 +3,8 @@ package academy;
 public class Student extends Person{
 
     private String strNumber;
+    public final static String[] cols = {"나이","이름","학번","주소","전화 번호","E-mail"};
+
 
 
     private Student(StudentBuilder builder){
@@ -13,6 +15,18 @@ public class Student extends Person{
 
     public String getStrNumber() {
         return strNumber;
+    }
+
+    @Override
+    public String[] getColumsInfo() {
+        String[] cols = new String[info_cnt];
+        int i = 0;
+        for(String col : super.getColumsInfo()){
+            cols[i++] =col;
+        }
+        cols[info_cnt-1] = "학번";
+
+        return cols;
     }
 
     @Override

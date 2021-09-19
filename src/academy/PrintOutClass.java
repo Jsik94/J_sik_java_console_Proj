@@ -14,7 +14,7 @@ public class PrintOutClass implements Actionable ,CodeInfo{
     final static int[] MENUOPTS = new int[]{1, 2, 3, 4,5};
     final static int GO_BACK = 104;
     final static int EXIT = 105;
-
+    private final static int WEIGHT = 100;
 
 
     InputClass inputClass;
@@ -43,25 +43,16 @@ public class PrintOutClass implements Actionable ,CodeInfo{
     public int run() {
         while (true){
             show();
-            int result = inputClass.getSubMenuInput(MENUOPTS);
+            int result_code = inputClass.getMenuInput(MENUOPTS)+WEIGHT;
+
             int request_code = 0;
 
-            switch (result+100) {
-                case PRINTOUT_STUDENT:
-                    request_code= print(PRINTOUT_STUDENT);
-                    break;
-                case PRINTOUT_TEACHER:
-                    request_code= print(PRINTOUT_TEACHER);
-                    break;
-                case PRINTOUT_ALL:
-                    request_code= print(PRINTOUT_ALL);
-                    break;
-                case GO_BACK:
-                    request_code = COMPLETE;
-                    break;
-                case EXIT:
-                    return MOVE_EXIT;
+            if((result_code==GO_BACK) || ( result_code == EXIT)){
+                break;
             }
+
+            PrintOut selector = new PrintTypeFactory(database).createInsert(result_code);
+            request_code = selector.print();
 
             if (request_code== CURRENT){
                 continue;

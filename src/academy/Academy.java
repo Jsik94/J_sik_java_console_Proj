@@ -27,6 +27,12 @@ public class Academy implements CodeInfo {
 
     public Academy() {
         database = new HashMap<>();
+        /*
+            기본적으로 돌아가야할 것
+            Address data를 관리하는 입출력 데이터 메모리에 올려둘 것
+            로그용 스레드 실행하고 입력시 마다 로그를 만들어 낼 것.
+         */
+
     }
 
     public Academy(int forTest) {
@@ -56,41 +62,43 @@ public class Academy implements CodeInfo {
             //입력 값
             inputClass = new InputClass();
 
-            int result = inputClass.getMainMenuInput(MENUOPTS);
+            int result = inputClass.getMenuInput(MENUOPTS);
 
             Actionable spliter =null;
 
             //입력값에 따른 흐름 분기 나중에 사용
             int request_code;
 
-
+            //factory로 띄어낼지 말지는 좀 결정하자.
             switch (result) {
                 case MAIN_INSERT:
-                    spliter = new InserMenutClass(database);
-                    request_code = spliter.run();
+                    spliter = new InserNavigator(database);
+//                    request_code = spliter.run();
                     break;
                 case MAIN_PRINTOUT:
                     spliter = new PrintOutClass(database);
-                    request_code = spliter.run();
+//                    request_code = spliter.run();
                     break;
                 case MAIN_MODIFY:
                     spliter = new ModifyInfoClass(database);
-                    request_code = spliter.run();
+//                    request_code = spliter.run();
                     break;
                 case MAIN_DELETE:
                     spliter = new DeleteClass(database);
-                    request_code = spliter.run();
+//                    request_code = spliter.run();
                     break;
+
                 case MAIN_SEARCH:
                     spliter = new SearchClass(database);
-                    request_code = spliter.run();
+//                    request_code = spliter.run();
                     break;
                 case MAIN_EXIT:
                     switch_toggle = false;
                     break;
 
-            }
 
+            }
+            request_code = spliter.run();
         }
 
         System.out.println("종료되었습니다.");

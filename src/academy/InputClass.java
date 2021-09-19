@@ -5,28 +5,20 @@ import java.util.Scanner;
 
 public class InputClass {
 
-    final static private int REQUEST_MAIN_MENU = 1;
     Scanner sc;
 
     public InputClass() {
 
     }
 
-    public int getMainMenuInput(int[] menuOpts) {
+    public int getMenuInput(int[] menuOpts) {
 
         System.out.println("원하시는 번호를 입력해 주세요 ");
         int result = 0;
 
         while (true) {
-            sc = new Scanner(System.in);
-            String data = sc.nextLine().trim();
-            if (!MyUtil.isNumber(data)) {
-                System.out.println("올바른 입력이 아닙니다.\n해당하는 번호를 골라주세요.");
-                continue;
-            }
-
             try{
-                result = Integer.parseInt(data);
+                result =getInteger();
             }catch (NumberFormatException e){
                 continue;
             }
@@ -37,6 +29,7 @@ public class InputClass {
                     break;
                 }
             }
+
             if (!toggle) {
                 System.out.println("해당하는 번호를 골라주세요.");
                 continue;
@@ -48,40 +41,40 @@ public class InputClass {
     }
 
 
-    public int getSubMenuInput(int[] menuOpts) {
-
-        System.out.println("원하시는 번호를 입력해 주세요 ");
-        int result = 0;
-
-        while (true) {
-            sc = new Scanner(System.in);
-            String data = sc.nextLine().trim();
-            if (!MyUtil.isNumber(data)) {
-                System.out.println("올바른 입력이 아닙니다.\n해당하는 번호를 골라주세요.");
-                continue;
-            }
-            try{
-                result = Integer.parseInt(data);
-            }catch (NumberFormatException e){
-                continue;
-            }
-
-            boolean toggle = false;
-            for (int opt : menuOpts) {
-                if (opt == result) {
-                    toggle = true;
-                    break;
-                }
-            }
-            if (!toggle) {
-                System.out.println("해당하는 번호를 골라주세요.");
-                continue;
-            }
-            break;
-        }
-
-        return result;
-    }
+//    public int getSubMenuInput(int[] menuOpts) {
+//
+//        System.out.println("원하시는 번호를 입력해 주세요 ");
+//        int result = 0;
+//
+//        while (true) {
+//            sc = new Scanner(System.in);
+//            String data = sc.nextLine().trim();
+//            if (!MyUtil.isNumber(data)) {
+//                System.out.println("올바른 입력이 아닙니다.\n해당하는 번호를 골라주세요.");
+//                continue;
+//            }
+//            try{
+//                result = Integer.parseInt(data);
+//            }catch (NumberFormatException e){
+//                continue;
+//            }
+//
+//            boolean toggle = false;
+//            for (int opt : menuOpts) {
+//                if (opt == result) {
+//                    toggle = true;
+//                    break;
+//                }
+//            }
+//            if (!toggle) {
+//                System.out.println("해당하는 번호를 골라주세요.");
+//                continue;
+//            }
+//            break;
+//        }
+//
+//        return result;
+//    }
 
     //Only confirm character
     public String getString() {
@@ -90,7 +83,7 @@ public class InputClass {
         while (true) {
             data = sc.nextLine().trim();
             if (MyUtil.isNumber(data)) {
-                System.out.println("올바른 입력이 아닙니다.");
+                System.out.println("올바른 입력이 아닙니다. 문자를 입력하십시오.");
                 continue;
             }
             break;
@@ -107,7 +100,7 @@ public class InputClass {
         while (true) {
             String data = sc.nextLine().trim();
             if (!MyUtil.isNumber(data)) {
-                System.out.println("올바른 입력이 아닙니다.");
+                System.out.println("올바른 입력이 아닙니다. 숫자를 입력하십시오.");
                 continue;
             }
             result = Integer.parseInt(data);
@@ -144,5 +137,8 @@ public class InputClass {
         }
 
     }
+
+
+
 
 }

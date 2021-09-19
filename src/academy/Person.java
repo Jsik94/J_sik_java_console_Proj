@@ -8,9 +8,15 @@ public class Person {
     private int age;
     private String name;
     private String addr;
-
     private String tel;
     private String email;
+
+
+    public String[] getColumsInfo(){
+        String[] cols = new String[]{"나이","이름","주소","전화번호","e-mail"};
+
+        return cols;
+    }
 
 
 
@@ -66,4 +72,7 @@ public class Person {
     public String getAddr() {
         return addr;
     }
+
+
+
 }

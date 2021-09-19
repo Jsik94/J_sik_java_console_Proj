@@ -3,8 +3,7 @@ package academy;
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class FileWriterClass implements DirectoryInfo{
 

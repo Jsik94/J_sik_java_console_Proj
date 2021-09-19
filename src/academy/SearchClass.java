@@ -16,7 +16,7 @@ public class SearchClass extends SearchTool implements Actionable, CodeInfo {
     public int run() {
 
         show();
-        int result = ip.getMainMenuInput(MENUOPTS);
+        int result = ip.getMenuInput(MENUOPTS);
 
         if((result+400) ==SEARCH_NAME){
 

@@ -2,6 +2,7 @@ package academy;
 
 public class Teacher extends Person{
     private String subject;
+    public final static String[] cols = {"나이","이름","과목","주소","전화 번호","E-mail"};
 
 
     private Teacher(TeacherBuilder builder){
@@ -10,6 +11,18 @@ public class Teacher extends Person{
         info_cnt+=1;
     }
 
+
+    @Override
+    public String[] getColumsInfo() {
+        String[] cols = new String[info_cnt];
+        int i = 0;
+        for(String col : super.getColumsInfo()){
+            cols[i++] =col;
+        }
+        cols[info_cnt-1] = "과목";
+
+        return cols;
+    }
     public String getSubject() {
         return subject;
     }
