@@ -5,6 +5,15 @@ import java.util.Map;
 
 public class SearchTool {
 
+    /*
+        실질적인 데이터 베이스 클래스임
+        검색 - [이름] / 기타 등등
+        삭제 -
+        수정 -
+        추가 -
+     */
+
+
     Map<String, ArrayList<Person>> database = null;
     InputClass ip;
 
@@ -41,6 +50,7 @@ public class SearchTool {
 
         }
         ArrayList<Person> find_list = new ArrayList<>();
+
 
         System.out.println(title + "될 사람의" + standard + "을(를) 선택해주세요.");
         if (isNum) {

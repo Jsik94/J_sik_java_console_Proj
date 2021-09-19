@@ -1,8 +1,6 @@
 package academy;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class InputClass {
@@ -105,6 +103,7 @@ public class InputClass {
     public int getInteger() {
         sc = new Scanner(System.in);
         int result = 0;
+
         while (true) {
             String data = sc.nextLine().trim();
             if (!MyUtil.isNumber(data)) {
@@ -121,6 +120,9 @@ public class InputClass {
     public String getOrigin(){
         sc = new Scanner(System.in);
         String data = sc.nextLine().trim();
+        /*
+            나중에 로그처리 여기서 하면 될듯
+         */
 
         return data;
     }

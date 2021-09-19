@@ -28,7 +28,27 @@
             <PaintGroupHighlightMap />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/academy/DirectoryInfo.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/academy/DisplayInterface.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/FileReader.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/FileReaderClass.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/FileWriterClass.java">
           <value>
             <PaintGroupHighlightMap />
           </value>
@@ -99,6 +119,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/academy/Teacher.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/datas/Address.txt">
           <value>
             <PaintGroupHighlightMap />
           </value>

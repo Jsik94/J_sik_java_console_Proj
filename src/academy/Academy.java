@@ -5,46 +5,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Academy implements CodeInfo {
+
     /*
-          Academy 객체
 
-            사용 목적
-            -> 필요 자원 적재
-            -> 프로그램 사용 흐름제어
+    행동을 나눌 필요가 있음
+    클래스명 싹다 변경할 것
+    Switch로 흐름 제어만하고 결과만 출력하는 클래스들 [이름]Navigator implement Action
 
-            constructor  | param -> FileReader 사용여부, test 모드인지 ,
-                필요한 자원 미리 적재
-
-            field
+    네비게이터에서 값을 받아 해당 일들을 행동하고 반환하는 클래스들 [이름]Activity
 
 
-            method
-                run
+
+
 
      */
 
-//    //singletone design
-//    private static Academy uniqueInstance = null;
-//    //singletone design
-//    private Academy getInstance(){
-//        if(uniqueInstance==null){
-//            synchronized (Academy.class){
-//                if(uniqueInstance ==null){
-//                    uniqueInstance = new Academy();
-//                }
-//            }
-//        }
-//        return uniqueInstance;
-//    }
-
-    //Field
-//    final static private int MOVE_INSERT = 1;
-//    final static private int MOVE_PRINTOUT = 2;
-//    final static private int MOVE_MODIFY = 3;
-//    final static private int MOVE_DELETE = 4;
-//    final static private int MOVE_SEARCH = 5;
-//    final static private int MOVE_EXIT = 999;
-//    final static private int MOVE_FIRST = 998;
     final static private int[] MENUOPTS = new int[]{1, 2, 3, 4, 5, 9};
     Map<String,ArrayList<Person>> database ;
 
