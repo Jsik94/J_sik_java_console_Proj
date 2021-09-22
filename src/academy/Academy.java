@@ -80,16 +80,16 @@ public class Academy implements CodeInfo {
 //                    request_code = spliter.run();
                     break;
                 case MAIN_MODIFY:
-                    spliter = new ModifyInfoClass(database);
+                    spliter = new ModifyNavigator(database);
 //                    request_code = spliter.run();
                     break;
                 case MAIN_DELETE:
-                    spliter = new DeleteClass(database);
+                    spliter = new DeleteNavigator(database);
 //                    request_code = spliter.run();
                     break;
 
                 case MAIN_SEARCH:
-                    spliter = new SearchClass(database);
+                    spliter = new SearchNavigator(database);
 //                    request_code = spliter.run();
                     break;
                 case MAIN_EXIT:

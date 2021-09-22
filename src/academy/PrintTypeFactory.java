@@ -3,7 +3,7 @@ package academy;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class PrintTypeFactory extends PrintFactory {
+public class PrintTypeFactory extends Factory<PrintOut> {
     Map<String, ArrayList<Person>> database;
 
     public PrintTypeFactory(Map<String, ArrayList<Person>> database) {
@@ -11,7 +11,7 @@ public class PrintTypeFactory extends PrintFactory {
     }
 
     @Override
-    PrintOut createInsert(int code_type) {
+    public PrintOut createInsert(int code_type) {
         PrintOut selector =null ;
 
         switch (code_type){

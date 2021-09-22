@@ -3,32 +3,47 @@ package academy;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class SearchTool {
+public class SearchValue implements Search{
 
-    /*
-        실질적인 데이터 베이스 클래스임
-        검색 - [이름] / 기타 등등
-        삭제 -
-        수정 -
-        추가 -
-     */
+    Map<String, ArrayList<Person>> database;
+    InputClass ip ;
+    String title;
+    int code_type;
 
 
-    Map<String, ArrayList<Person>> database = null;
-    InputClass ip;
-
-
-    public SearchTool(Map<String, ArrayList<Person>> database) {
+    public SearchValue(Map<String, ArrayList<Person>> database, String title, int code_type) {
         this.database = database;
-        ip = new InputClass();
+        this.ip = new InputClass();
+        this.title = title;
+        this.code_type = code_type;
     }
 
+
+
+    @Override
+    public int search() {
+        ArrayList<Person> result = find(code_type,title);
+        StringBuilder sb = new StringBuilder();
+        if(result==null){
+            return CodeInfo.MOVE_PREV;
+        }else{
+            System.out.println(result.size()+"명을 찾았습니다!");
+        }
+
+        for (Person one : result){
+            sb.append(showToString(one));
+        }
+
+        System.out.println(sb);
+        return CodeInfo.COMPLETE;
+    }
 
     protected ArrayList<Person> find(int kind, String title) {
         String standard = null;
         boolean isNum = false;
         int i_result = 0;
         String str_result = null;
+
         switch (kind) {
 
             case CodeInfo.SEARCH_AGE:
@@ -93,44 +108,11 @@ public class SearchTool {
             }
         }
 
-        if (find_list == null) {
-            System.out.println("해당 정보가 존재하지 않습니다.");
-        } else {
-            System.out.println(find_list.size() + "명을 찾았습니다.");
+        if (find_list.isEmpty()){
+            System.out.println("해당 정보가 존재하지 않았습니다.");
+            return null;
         }
 
         return find_list;
     }
-
-
-
-
-    protected String showToString(Person one) {
-        StringBuilder sb = new StringBuilder();
-        String type = null;
-        String uniqueData = null;
-        sb.append("분류 : ");
-        if (one instanceof Student) {
-            sb.append("학생 ");
-            type = "학번";
-            uniqueData = ((Student) one).getStrNumber();
-        } else if (one instanceof Teacher) {
-            sb.append("선생님 ");
-            type = "과목";
-            uniqueData = ((Teacher) one).getSubject();
-        }
-        sb.append("\n");
-
-
-        sb.append("이름 : " + one.getName() + " ")
-                .append("나이 : " + one.getAge() + " ")
-                .append(type + " : " + uniqueData + " ")
-                .append("주소 : " + one.getAddr() + " ")
-                .append("번호 : " + one.getTel() + " ")
-                .append("이메일 : " + one.getEmail() + " ");
-
-
-        return new String(sb);
-    }
-
 }

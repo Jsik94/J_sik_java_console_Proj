@@ -11,7 +11,7 @@ public class PrintOutClass implements Actionable ,CodeInfo{
      *
      */
 
-    final static int[] MENUOPTS = new int[]{1, 2, 3, 4,5};
+    final static int[] MENUOPTS = new int[]{1, 2, 3, 4};
     final static int GO_BACK = 104;
     final static int EXIT = 105;
     private final static int WEIGHT = 100;
@@ -62,64 +62,6 @@ public class PrintOutClass implements Actionable ,CodeInfo{
         }
 
         return COMPLETE;
-    }
-
-    public int print(int type){
-
-        if(database.isEmpty()){
-            System.out.println("등록된 정보가 없습니다.");
-            return CURRENT;
-        }
-
-
-        StringBuilder sb = new StringBuilder();
-        String unique = "전체";
-        boolean student = true, teacher = true;
-        if(type == PRINTOUT_STUDENT){
-            teacher = false;
-            unique = "학번";
-        }else if(type == PRINTOUT_TEACHER){
-            student = false;
-            unique = "과목";
-        }
-
-
-        System.out.println("<--\t\t\t\t\t\t정보 출력\t\t\t\t\t\t-->");
-        //before format
-//        System.out.printf("%-5s %-2s %-8s %-22s%-11s %-32s\n","이름","나이",unique,"주소",
-//                "연락처","메일 주소");
-        System.out.printf("%-8s%-6s%-15s%-22s%-20s%-32s\n","이름","나이",unique,"주소",
-                "연락처","메일 주소");
-
-
-        for (String keyset : database.keySet()){
-            for (Person info : database.get(keyset)){
-                if (info instanceof Student && student){
-
-                    //before format "%-5s %-3d %-9d %-20s %-11s %-32s"
-                    sb.append(String.format("%-8s%-6d%-15s%-22s%-22s%-32s",
-                            info.getName(),
-                            info.getAge(),
-                            ((Student) info).getStrNumber(),
-                            info.getAddr(),
-                            info.getTel(),
-                            info.getEmail())).append("\n");
-                }
-                if (info instanceof Teacher && teacher){
-                    sb.append(String.format("%-8s%-6d%-15s%-22s%-22s%-32s",
-                            info.getName(),
-                            info.getAge(),
-                            ((Teacher) info).getSubject(),
-                            info.getAddr(),
-                            info.getTel(),
-                            info.getEmail())).append("\n");
-                }
-            }
-        }
-
-        System.out.println(sb);
-
-        return CURRENT;
     }
 
 

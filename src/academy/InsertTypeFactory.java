@@ -3,7 +3,7 @@ package academy;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class InsertTypeFactory extends InsertFactory {
+public class InsertTypeFactory extends Factory<Insert> {
 
     Map<String, ArrayList<Person>> database;
 
@@ -12,7 +12,7 @@ public class InsertTypeFactory extends InsertFactory {
     }
 
     @Override
-    Insert createInsert(int type_code) {
+    public Insert createInsert(int type_code) {
 
         Insert insert = null;
         switch (type_code){

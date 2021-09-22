@@ -30,9 +30,11 @@ public interface CodeInfo {
     final static int SEARCH_UNIQUE = 404;
     final static int SEARCH_TEL = 405;
     final static int SEARCH_EMAIL = 406;
-
-
-
+    int SEARCH_KEY = 407;
+    int SEARCH_VALUE = 408;
+    int SEARCH_FAIL = 409;
+    int DELETE_ALL = 501;
+    int DELETE_ONE = 502;
 
 
 //    final static int GO_BACK = 4;
