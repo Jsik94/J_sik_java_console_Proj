@@ -59,7 +59,7 @@ public class DeleteNavigator extends SearchKey implements Actionable, CodeInfo{
 //            return MOVE_PREV;
 //        }
 //        show();
-
+        show();
         return request_code;
     }
 

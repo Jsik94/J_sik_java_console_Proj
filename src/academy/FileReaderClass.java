@@ -10,6 +10,17 @@ public class FileReaderClass implements DirectoryInfo{
     private boolean showLog = true;
     StringBuilder sb;
 
+    public FileReaderClass(String dir){
+        access_file(dir);
+        showLog =false;
+    }
+
+    public FileReaderClass(){
+        //defualt Address database
+        access_file(DIR_DEFUALT);
+
+    }
+
     private void access_file(String dir) {
         clearBuffer();
         BufferedReader br = null;
@@ -61,16 +72,7 @@ public class FileReaderClass implements DirectoryInfo{
     }
 
 
-    public FileReaderClass(String dir){
-        access_file(dir);
-        showLog =false;
-    }
 
-    public FileReaderClass(){
-        //defualt Address database
-        access_file(DIR_DEFUALT);
-
-    }
 
 
 

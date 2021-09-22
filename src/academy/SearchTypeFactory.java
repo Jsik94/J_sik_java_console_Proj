@@ -9,6 +9,7 @@ public class SearchTypeFactory extends Factory<Search>{
 
     public SearchTypeFactory(Map<String, ArrayList<Person>> database,String title) {
         this.database = database;
+        this.title = title;
     }
 
     @Override

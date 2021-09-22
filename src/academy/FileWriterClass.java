@@ -12,6 +12,20 @@ public class FileWriterClass implements DirectoryInfo{
     private boolean showLog = true;
     PrintWriter bw = null;
 
+
+    public FileWriterClass(){
+        this(DIR_DEFAULT);
+    }
+
+    public FileWriterClass(String dir) {
+        this(dir,false);
+    }
+
+    public FileWriterClass(String dir ,boolean appendOps){
+        access_file(dir);
+        showLog = false;
+    }
+
     private void access_file(String dir) {
 
 
@@ -46,18 +60,6 @@ public class FileWriterClass implements DirectoryInfo{
 
     }
 
-    public FileWriterClass(){
-        this(DIR_DEFAULT);
-    }
-
-    public FileWriterClass(String dir) {
-        this(dir,false);
-    }
-
-    public FileWriterClass(String dir ,boolean appendOps){
-        access_file(dir);
-        showLog = false;
-    }
 
 
 

@@ -22,7 +22,7 @@ public class SearchValue implements Search{
 
     @Override
     public int search() {
-        ArrayList<Person> result = find(code_type,title);
+        ArrayList<Person> result = find(code_type);
         StringBuilder sb = new StringBuilder();
         if(result==null){
             return CodeInfo.MOVE_PREV;
@@ -38,7 +38,7 @@ public class SearchValue implements Search{
         return CodeInfo.COMPLETE;
     }
 
-    protected ArrayList<Person> find(int kind, String title) {
+    protected ArrayList<Person> find(int kind) {
         String standard = null;
         boolean isNum = false;
         int i_result = 0;

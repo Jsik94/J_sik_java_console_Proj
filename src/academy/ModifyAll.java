@@ -24,6 +24,8 @@ public class ModifyAll implements Modify {
         e_mail = target.getEmail();
         int age = target.getAge();
 
+        database.get(MyUtil.getTag(target.getName())).remove(target);
+
         switch (code_type){
             case CodeInfo.MODI_NAME:
                 System.out.println("변경할 이름을 입력 해주세요.");
