@@ -1,13 +1,12 @@
 package academy;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import academy.crypto.AES128Util;
 
+import java.io.*;
 
 public class FileWriterClass implements DirectoryInfo{
-
-    final static private String DIR_DEFAULT = "src/academy/datas/Address_copied.txt";
+    final static private String TITLE="FILE_WRITER_CLASS";
+    final static private String DIR_DEFAULT = "src/academy/datas/Address.txt";
     private boolean appendOps = false;
     private boolean showLog = true;
     PrintWriter bw = null;
@@ -28,34 +27,35 @@ public class FileWriterClass implements DirectoryInfo{
 
     private void access_file(String dir) {
 
-
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " | FILE_WRITER_CLASS | Try to Access : " + dir);
+        MyLog.d(TITLE,"Try to Access : " + dir);
         try {
             bw = new PrintWriter(new FileWriter(dir,false));
-            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " | FILE_WRITER_CLASS | OPEN_SUCCESS | ");
+            MyLog.d(TITLE,"OPEN_SUCCESS");
+
 
         } catch (FileNotFoundException e) {
-
-            System.out.println("FILE_WRITER_CLASS | OPEN_FAIL |\t" + e.getMessage());
+            MyLog.e(TITLE,"OPEN_FAIL" + e.getMessage());
         } catch (IOException e) {
-            System.out.println("FILE_WRITER_CLASS | READ_FAIL |\t" + e.getMessage());
+            MyLog.e(TITLE,"OPEN_FAIL" + e.getMessage());
         }
 
     }
 
     public void setData(String data) {
-
+//        AES128Util crypto = new AES128Util(AES128Util.getLocalMacAddress());
+//        String trans = crypto.encrypt(data);
+//        System.out.println(trans);
         for (String line : data.split("\r\n")) {
             bw.println(line);
         }
-
+        closed();
     }
 
 
     private void closed(){
         if(bw !=null){
             bw.close();
-            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+ " | FILE_WRITER_CLASS | CLOSE_SUCCESS | ");
+            MyLog.d(TITLE,"CLOSE_SUCCESS");
         }
 
     }

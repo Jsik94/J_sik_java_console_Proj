@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ModifyAll implements Modify {
+    private static String TILTE= "ModifyAll";
     Map<String,ArrayList<Person>> database;
     Person target= null;
     InputClass ip;
     public ModifyAll(Map<String, ArrayList<Person>> database, String title,Person target) {
         this.target = target;
         this.database = database;
-        ip = new InputClass();
+        ip = new InputClass(TILTE);
     }
 
     @Override

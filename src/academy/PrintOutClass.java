@@ -10,7 +10,7 @@ public class PrintOutClass implements Actionable ,CodeInfo{
      * 입출력을 구분하는 식으로 하는게 나을 듯
      *
      */
-
+    final static String TITLE ="Print Out";
     final static int[] MENUOPTS = new int[]{1, 2, 3, 4};
     final static int GO_BACK = 104;
     final static int EXIT = 105;
@@ -22,7 +22,7 @@ public class PrintOutClass implements Actionable ,CodeInfo{
 
 
     public PrintOutClass(Map<String,ArrayList<Person>> database) {
-        inputClass = new InputClass();
+        inputClass = new InputClass(TITLE);
         this.database = database;
     }
 

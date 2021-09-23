@@ -14,7 +14,7 @@ public class SearchNavigator implements Actionable, CodeInfo {
 
     public SearchNavigator(Map<String,ArrayList<Person>> database) {
         this.database = database;
-        ip= new InputClass();
+        ip= new InputClass(TITLE);
     }
 
     @Override

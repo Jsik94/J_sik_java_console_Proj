@@ -23,6 +23,11 @@
             <PaintGroupHighlightMap />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/academy/Configure.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/academy/Delete.java">
           <value>
             <PaintGroupHighlightMap />
@@ -113,6 +118,11 @@
             <PaintGroupHighlightMap />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/academy/InsertNavigator.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/academy/InsertStudent.java">
           <value>
             <PaintGroupHighlightMap />
@@ -163,6 +173,11 @@
             <PaintGroupHighlightMap />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/academy/MyLog.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/academy/MyUtil.java">
           <value>
             <PaintGroupHighlightMap />
@@ -209,6 +224,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/academy/PrintTypeFactory.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/SaveData.java">
           <value>
             <PaintGroupHighlightMap />
           </value>
@@ -268,12 +288,22 @@
             <PaintGroupHighlightMap />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/academy/ThreadManage.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/academy/app/LogViewer.java">
           <value>
             <PaintGroupHighlightMap />
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/academy/app/Memo.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/crypto/AES128Util.java">
           <value>
             <PaintGroupHighlightMap />
           </value>
@@ -289,6 +319,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/academy/datas/Address.txt">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/datas/DataGenerator.java">
           <value>
             <PaintGroupHighlightMap />
           </value>

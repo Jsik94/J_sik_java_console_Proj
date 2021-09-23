@@ -39,7 +39,7 @@ public class Teacher extends Person{
          return false;
     }
 
-    static class TeacherBuilder {
+    public static class TeacherBuilder {
         private int age;
         private String name;
         private String subject;

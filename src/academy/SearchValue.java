@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class SearchValue implements Search{
-
+    private static final String TITLE = "Search Value";
     Map<String, ArrayList<Person>> database;
     InputClass ip ;
     String title;
@@ -13,7 +13,7 @@ public class SearchValue implements Search{
 
     public SearchValue(Map<String, ArrayList<Person>> database, String title, int code_type) {
         this.database = database;
-        this.ip = new InputClass();
+        this.ip = new InputClass(TITLE);
         this.title = title;
         this.code_type = code_type;
     }

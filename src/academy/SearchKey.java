@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class SearchKey implements Search {
+    final static private String TITLE = "SearchKey";
     Map<String, ArrayList<Person>> database;
     InputClass ip ;
     String title;
@@ -11,7 +12,7 @@ public class SearchKey implements Search {
     public SearchKey(Map<String, ArrayList<Person>> database, String title) {
         this.database = database;
         this.title = title;
-        ip = new InputClass();
+        ip = new InputClass(TITLE);
     }
 
     @Override

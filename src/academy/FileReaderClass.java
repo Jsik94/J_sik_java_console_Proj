@@ -1,21 +1,25 @@
 package academy;
 
+import academy.crypto.AES128Util;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FileReaderClass implements DirectoryInfo{
 
+    static private volatile FileReaderClass uniqueInstance;
+    final static private String TITLE = "FILE_READER_CLASS";
     final static private String DIR_DEFUALT = "src/academy/datas/Address.txt";
     private boolean showLog = true;
-    StringBuilder sb;
+    private StringBuilder sb;
 
-    public FileReaderClass(String dir){
+    private FileReaderClass(String dir){
         access_file(dir);
         showLog =false;
     }
 
-    public FileReaderClass(){
+    private FileReaderClass(){
         //defualt Address database
         access_file(DIR_DEFUALT);
 
@@ -25,10 +29,10 @@ public class FileReaderClass implements DirectoryInfo{
         clearBuffer();
         BufferedReader br = null;
 
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+" | FILE_READER_CLASS | Try to Access : "+dir );
+        MyLog.d(TITLE," Try to Access : "+dir );
         try {
             br = new BufferedReader(new FileReader(dir));
-            System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+" | FILE_READER_CLASS | OPEN_SUCCESS | ");
+            MyLog.d(TITLE,"OPEN_SUCCESS");
 
             String data;
             while ((data = br.readLine()) != null) {
@@ -37,22 +41,20 @@ public class FileReaderClass implements DirectoryInfo{
             }
 
         } catch (FileNotFoundException e) {
-
-            System.out.println("FILE_READER_CLASS | OPEN_FAIL |\t" + e.getMessage());
+            MyLog.e(TITLE,"OPEN_FAIL | \t " +e.getMessage());
         } catch (IOException e) {
-            System.out.println("FILE_READER_CLASS | READ_FAIL |\t" + e.getMessage());
+            MyLog.e(TITLE,"OPEN_FAIL | \t " +e.getMessage());
         }finally {
 
             if(br !=null){
 
                 try {
                     br.close();
-                    System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+ " | FILE_READER_CLASS | CLOSE_SUCCESS | ");
+                    MyLog.d(TITLE,"CLOSE_SUCCESS ");
                 } catch (IOException e) {
-                    System.out.println("FILE_READER_CLASS | CLOSE_FAIL |\t" + e.getMessage());
+                    MyLog.e(TITLE,"CLOSE_FAIL");
                 }
             }
-
         }
 
 
@@ -63,14 +65,38 @@ public class FileReaderClass implements DirectoryInfo{
     }
 
     public String toStringAll(){
+//        AES128Util crpto = new AES128Util(AES128Util.getLocalMacAddress());
+//        String output= crpto.decrypt(sb.toString());
+//
+//        System.out.println(output);
+//        if (output==null) return sb.toString();
+//        return output;
 
         return sb.toString();
     }
 
-    public String[] toStringLine(){
-        return sb.toString().split("\r\n");
+    public void setDir(String Dir){
+        access_file(Dir);
     }
 
+    public String[] toStringLine(){
+
+
+        return toStringAll().split("\n");
+    }
+
+
+    public static FileReaderClass getInstance(){
+        if(uniqueInstance==null){
+            synchronized (FileReaderClass.class){
+                if(uniqueInstance==null){
+                    uniqueInstance = new FileReaderClass();
+                }
+            }
+        }
+
+        return uniqueInstance;
+    }
 
 
 

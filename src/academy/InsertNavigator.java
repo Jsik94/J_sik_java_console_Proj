@@ -3,17 +3,19 @@ package academy;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class InserNavigator implements Actionable,CodeInfo, Navigatable {
-    final static private String TITLE = "입력";
+public class InsertNavigator implements Actionable,CodeInfo, Navigatable {
+    final static private String TITLE = "Insert Navigator";
     final static int[] MENUOPTS = new int[]{1,2,3};
+
+
 
 
     InputClass inputClass ;
     Map<String,ArrayList<Person>> database =null;
 
 
-    public InserNavigator(Map<String,ArrayList<Person>> database) {
-        inputClass = new InputClass();
+    public InsertNavigator(Map<String,ArrayList<Person>> database) {
+        inputClass = new InputClass(TITLE);
         this.database = database;
     }
 

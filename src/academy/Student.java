@@ -41,7 +41,7 @@ public class Student extends Person{
         return false;
     }
 
-    static class StudentBuilder {
+    public static class StudentBuilder {
         private int age;
         private String name;
         private String strNumber;
