@@ -13,7 +13,9 @@ public interface CodeInfo {
     final static int MAIN_DELETE = 4;
     final static int MAIN_SEARCH = 5;
     final static int MAIN_SAVE = 6;
+    final static int MAIN_SETTING = 7;
     final static int MAIN_EXIT = 9;
+
     final static int PRINTOUT_STUDENT = 101;
     final static int PRINTOUT_TEACHER = 102;
     final static int PRINTOUT_ALL = 103;

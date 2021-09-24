@@ -28,6 +28,11 @@
             <PaintGroupHighlightMap />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/academy/DataTempSaver.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/academy/Delete.java">
           <value>
             <PaintGroupHighlightMap />
@@ -184,6 +189,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/academy/Navigatable.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/Observer.java">
           <value>
             <PaintGroupHighlightMap />
           </value>

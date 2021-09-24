@@ -19,10 +19,6 @@ public class Configure implements Actionable {
     //향후 추가
     //- 엔터 음향
     //- 시작 음향
-
-
-
-
      */
 
 
@@ -49,9 +45,6 @@ public class Configure implements Actionable {
 
     }
 
-    public void notify_changed(){
-
-    }
 
 
 }

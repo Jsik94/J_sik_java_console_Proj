@@ -2,7 +2,7 @@ package academy;
 
 import java.util.*;
 
-public class ThreadManage {
+public class ThreadManage implements Subject{
 
     private volatile static ThreadManage uniqueInstance;
 
@@ -100,8 +100,20 @@ public class ThreadManage {
         return uniqueInstance;
     }
 
+    @Override
+    public void addObserver(Observer o) {
+        myThreadSet.add(o);
+    }
 
-    private class MyThread {
+    @Override
+    public void removeObserver(Observer o) {
+        myThreadSet.remove(o);
+    }
+
+    @Override
+    public void notifyObservers() {
 
     }
+
+
 }
