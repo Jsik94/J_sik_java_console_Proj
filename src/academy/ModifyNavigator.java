@@ -30,7 +30,6 @@ public class ModifyNavigator extends SearchKey implements Actionable,CodeInfo{
         }else{
             target = targets.get(0);
         }
-
         show();
         int result = ip.getMenuInput(MENUOPTS)+WEIGHT;
         Modify selector = new ModifyAll(database,title,target);

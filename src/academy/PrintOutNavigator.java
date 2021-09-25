@@ -2,7 +2,7 @@ package academy;
 
 import java.util.*;
 
-public class PrintOutClass implements Actionable ,CodeInfo{
+public class PrintOutNavigator implements Actionable ,CodeInfo{
     /*
      * 분리 예정
      * idea 1
@@ -21,7 +21,7 @@ public class PrintOutClass implements Actionable ,CodeInfo{
     Map<String,ArrayList<Person>> database = null;
 
 
-    public PrintOutClass(Map<String,ArrayList<Person>> database) {
+    public PrintOutNavigator(Map<String,ArrayList<Person>> database) {
         inputClass = new InputClass(TITLE);
         this.database = database;
     }

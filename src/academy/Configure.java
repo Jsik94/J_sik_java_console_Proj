@@ -45,20 +45,22 @@ public class Configure implements Actionable ,CodeInfo{
 
             show();
             System.out.println("해당 번호를 누르시면 설정이 변경됩니다.");
-            int result = ip.getMenuInput(MENUOPTS);
+            int result = ip.getMenuInput(MENUOPTS)+WEIGHT;
+            ThreadManage tm = ThreadManage.getUniqueInstance();
 
             switch (result){
                 case CONFIGURE_TEMPSAVER:
-
+                    tm.stopThread("TempSaver");
                     break;
                 case CONFIGURE_MUSIC:
-
+                    tm.stopThread("MusicEnterEffect");
                     break;
                 case CONFIGURE_LOG:
-
+                    MyLog.setStatus(!MyLog.getStatus());
                     break;
                 case CONFIGURE_ENTER_SOUND:
-
+                    MusicEnterEffect effect = MusicEnterEffect.getInstance();
+                    effect.setStatus(!effect.getStatus());
                     break;
 
                 case CONFIGURE_BACK:
@@ -98,8 +100,8 @@ public class Configure implements Actionable ,CodeInfo{
             String tmp = tm.getThread(obs.getName()).getState().toString();
             sb.append( i+++") "+obs.getName()+ " : " + (tmp.equals(status_waiting) ? "On" : "Off")).append("\n");
         }
+        sb.append(i+++") " + "Show Log :" + (MyLog.getStatus() ?  "On" : "Off") ).append("\n");
         sb.append(i+++") " + "EnterEffect :" + (effect.getStatus() ?  "On" : "Off") ).append("\n");
-        sb.append(i+++") " + "Log Print :" + (MyLog.getStatus() ?  "On" : "Off") ).append("\n");
         sb.append(i+++") " + "뒤로가기 :" + (MyLog.getStatus() ?  "On" : "Off") ).append("\n");
 
         System.out.println(sb);

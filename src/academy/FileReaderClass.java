@@ -62,16 +62,11 @@ public class FileReaderClass implements DirectoryInfo{
     }
 
     public String toStringAll(){
-//        AES128Util crpto = new AES128Util(AES128Util.getLocalMacAddress());
-//        String output= crpto.decrypt(sb.toString());
-//
-//        System.out.println(output);
-//        if (output==null) return sb.toString();
-//        return output;
 
+        MyLog.d(TITLE,"Try to decrypt data....");
         AES128Util cyper = new AES128Util(AES128Util.getLocalMacAddress());
         String decrypt = cyper.decrypt(sb.toString());
-        System.out.println(decrypt);
+        MyLog.d(TITLE,"Data decrpyt Success!");
         return decrypt;
     }
 

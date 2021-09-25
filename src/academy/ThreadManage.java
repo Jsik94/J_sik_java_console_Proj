@@ -76,7 +76,6 @@ public class ThreadManage implements Subject{
             if (!thread.getThreadGroup().getName().equals("MyThread")) continue;
             if (thread.getName().equals(name)) {
                 System.out.println(thread.getName());
-                System.out.println("멈췃지렁!");
                 thread.interrupt();
                 return true;
             }
@@ -129,5 +128,11 @@ public class ThreadManage implements Subject{
     public void notifyObservers() {
     }
 
+    public void offAll(){
+        MyLog.d(TITLE,"Prepare to stop all Observers... Count : " + myThreadSet.size());
+        for (Observer one : myThreadSet) {
+           stopThread(one.getName());
+        }
+    }
 
 }

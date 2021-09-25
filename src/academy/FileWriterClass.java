@@ -42,35 +42,25 @@ public class FileWriterClass implements DirectoryInfo{
 
     public void setData(String data) {
         access_file(DEFAULT);
-        System.out.println(data);
-        System.out.println("after encrypt");
+
+        MyLog.d(TITLE,"Encrypt data on your MAC Key");
         AES128Util cyper = new AES128Util(AES128Util.getLocalMacAddress());
         String encrypt = cyper.encrypt(data);
 
         bw.println(encrypt);
 
+        MyLog.d(TITLE,"Data Write Success!");
         closed();
     }
     public void setData(String data,String dir) {
-
-
         access_file(dir);
-        System.out.println(data);
-        System.out.println("after encrypt");
-        AES128Util cyper = new AES128Util(AES128Util.getLocalMacAddress());
-        String encrypt = cyper.encrypt(data);
-
-        bw.println(encrypt);
-
+        for (String line : data.split("\r\n")) {
+            bw.println(line);
+        }
+        MyLog.d(TITLE,"Data Write Success!");
         closed();
     }
 
-    /*
-    System.out.println(sb);
-            System.out.println("after encrypt");
-            AES128Util cyper = new AES128Util(AES128Util.getLocalMacAddress());
-            String encrypt = cyper.encrypt(sb.toString());
-     */
 
 
     private void closed(){

@@ -34,6 +34,7 @@ public class ModifyAll implements Modify {
 
                 break;
             case CodeInfo.MODI_AGE:
+                System.out.println("변경할 나이를 입력 해주세요.");
                 age = ip.getInteger();
                 break;
             case CodeInfo.MODI_ADDR:

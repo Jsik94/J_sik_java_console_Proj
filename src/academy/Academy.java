@@ -4,7 +4,7 @@ import academy.datas.DataGenerator;
 
 import java.util.*;
 
-public class Academy implements CodeInfo {
+public class Academy implements CodeInfo ,DisplayInterface{
 
     /*
 
@@ -24,9 +24,7 @@ public class Academy implements CodeInfo {
     DataTempSaver dts = null;
     MusicOpening mp =null;
 
-    public Academy() {
 
-    }
 
     public Academy(boolean isdebug) {
 
@@ -43,7 +41,7 @@ public class Academy implements CodeInfo {
         this.database = new HashMap<>();
         MyUtil.connectDataBase(TITLE, database);
         tm = ThreadManage.getUniqueInstance();
-        new DataTempSaver(tm,database);
+        dts = new DataTempSaver(tm,database);
         new MusicOpening(tm);
         tm.runALL();
         tm.showCurrentThead();
@@ -53,7 +51,7 @@ public class Academy implements CodeInfo {
             DataGenerator dg = new DataGenerator(database);
             dg.gen(100);
         }
-//        MyLog.setStatus(false);
+        MyLog.setStatus(false);
 
     }
 
@@ -67,7 +65,7 @@ public class Academy implements CodeInfo {
 
         while (switch_toggle) {
             //네비게이션 화면 출력
-            ShowMainTemporary.getshow();
+            show();
             //입력 값
             inputClass = new InputClass(TITLE);
 
@@ -85,7 +83,7 @@ public class Academy implements CodeInfo {
 //                    request_code = spliter.run();
                     break;
                 case MAIN_PRINTOUT:
-                    spliter = new PrintOutClass(database);
+                    spliter = new PrintOutNavigator(database);
 //                    request_code = spliter.run();
                     break;
                 case MAIN_MODIFY:
@@ -131,10 +129,20 @@ public class Academy implements CodeInfo {
 
 
 
-        System.out.println("종료되었습니다.");
         MyLog.d(TITLE,"App OFF");
+        System.out.println("종료되었습니다.");
+        System.exit(0);
     }
 
+    @Override
+    public void show(){
+        System.out.println("=============\t기본 메뉴 설정\t=============");
+        System.out.println("=\t\t\t\t\t\t\t\t\t\t\t=");
+        System.out.println("=\t1.입력 2.출력 3.수정 4.삭제 5.검색 9.종료\t=");
+        System.out.println("=\t6.파일저장\t7.설정\t\t\t\t\t\t=");
+        System.out.println("=\t\t\t\t\t\t\t\t\t\t\t=");
+        System.out.println("=============================================");
+    }
 
 
 

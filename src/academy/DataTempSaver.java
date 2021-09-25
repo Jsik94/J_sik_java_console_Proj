@@ -8,6 +8,7 @@ import java.util.Map;
 public class DataTempSaver implements Observer{
     final static private int DEFAULT_TIME = 300000; //5분
     final static private String NAME = "TempSaver";
+    final static private String TITLE = "DataTempSaver";
     final static private boolean isDaemon = true;
 
     private int time;
@@ -52,11 +53,11 @@ public class DataTempSaver implements Observer{
         while (true){
 
             try {
+                fwc.setData(MyUtil.makeDataFormat(database),"src/academy/logs/input/TempData_"+new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())+".txt");
                 Thread.sleep(time);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                MyLog.e(TITLE,"Fail to run :"+ e.getMessage());
             }
-            fwc.setData(MyUtil.makeDataFormat(database),"src/academy/logs/input/TempData_"+new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())+".txt");
 
         }
 

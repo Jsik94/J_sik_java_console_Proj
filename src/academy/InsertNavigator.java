@@ -3,7 +3,7 @@ package academy;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class InsertNavigator implements Actionable,CodeInfo, Navigatable {
+public class InsertNavigator implements Actionable,CodeInfo {
     final static private String TITLE = "Insert Navigator";
     final static int[] MENUOPTS = new int[]{1,2,3};
 

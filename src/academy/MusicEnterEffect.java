@@ -79,7 +79,10 @@ public class MusicEnterEffect implements MusicInterface, Runnable{
 
     @Override
     public void run() {
-        musicStart();
+        if (status){
+
+            musicStart();
+        }
     }
 
 

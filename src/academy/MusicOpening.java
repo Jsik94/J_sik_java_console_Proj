@@ -11,17 +11,16 @@ public class MusicOpening implements MusicInterface,Observer {
     private Clip clip;
     private Subject threadManage;
 
-
     public MusicOpening (Subject threadManage){
         this.threadManage = threadManage;
-        threadManage.addObserver(this);
+        this.threadManage.addObserver(this);
     }
 
 
 
 
     @Override
-    public void musicStart() {
+    public void musicStart()  {
         MyLog.d(TITLE,"Prepare to load Opening Music....");
         try {
             File musicPath = new File(getMusicDir() + music);
@@ -71,7 +70,9 @@ public class MusicOpening implements MusicInterface,Observer {
 
     @Override
     public void run() {
-        musicStart();
+
+            musicStart();
+
     }
 
 //    public static void main(String[] args) {
