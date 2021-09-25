@@ -1,5 +1,7 @@
 package academy;
 
+import academy.crypto.AES128Util;
+
 import java.io.*;
 
 public class FileReaderClass implements DirectoryInfo{
@@ -28,11 +30,12 @@ public class FileReaderClass implements DirectoryInfo{
             br = new BufferedReader(new FileReader(dir));
             MyLog.d(TITLE,"OPEN_SUCCESS");
 
-            String data;
-            while ((data = br.readLine()) != null) {
-                sb.append(data).append("\n");
-
-            }
+//            String data;
+//            while ((data = br.readLine()) != null) {
+//                sb.append(data).append("\n");
+//
+//            }
+            sb.append(br.readLine());
 
         } catch (FileNotFoundException e) {
             MyLog.e(TITLE,"OPEN_FAIL | \t " +e.getMessage());
@@ -66,10 +69,10 @@ public class FileReaderClass implements DirectoryInfo{
 //        if (output==null) return sb.toString();
 //        return output;
 
-
-
-
-        return sb.toString();
+        AES128Util cyper = new AES128Util(AES128Util.getLocalMacAddress());
+        String decrypt = cyper.decrypt(sb.toString());
+        System.out.println(decrypt);
+        return decrypt;
     }
 
     public void setDir(String Dir){
@@ -78,8 +81,13 @@ public class FileReaderClass implements DirectoryInfo{
 
     public String[] toStringLine(){
 
+        String data ;
 
-        return toStringAll().split("\n");
+        if( (data=toStringAll())==null){
+            return null;
+        }
+
+        return data.split("\n");
     }
 
 

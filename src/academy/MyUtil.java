@@ -116,10 +116,11 @@ public class MyUtil {
 
     public static void connectDataBase(String TITLE, Map<String, ArrayList<Person>> database) {
         MyLog.d(TITLE, "Loading data in Memory...");
-        String[] datas = FileReaderClass.getInstance().toStringLine();
+
+
         Person one;
         try {
-
+            String[] datas = FileReaderClass.getInstance().toStringLine();
             for (String data : datas) {
                 StringTokenizer stk = new StringTokenizer(data, "\t");
                 if (stk.nextToken().equals("Student")) {
@@ -158,7 +159,10 @@ public class MyUtil {
                 database.get(tag).add(one);
 
             }
-        } catch (NoSuchElementException e) {
+        }catch (NullPointerException e) {
+            MyLog.e(TITLE, "Fail to load data :" + e.getMessage());
+
+        }catch (NoSuchElementException e) {
             MyLog.e(TITLE, "Fail to load data :" + e.getMessage());
             return;
         } catch (NumberFormatException e) {

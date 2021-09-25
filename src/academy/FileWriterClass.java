@@ -1,5 +1,7 @@
 package academy;
 
+import academy.crypto.AES128Util;
+
 import java.io.*;
 
 public class FileWriterClass implements DirectoryInfo{
@@ -39,23 +41,36 @@ public class FileWriterClass implements DirectoryInfo{
     }
 
     public void setData(String data) {
-//        AES128Util crypto = new AES128Util(AES128Util.getLocalMacAddress());
-//        String trans = crypto.encrypt(data);
-//        System.out.println(trans);
+        access_file(DEFAULT);
+        System.out.println(data);
+        System.out.println("after encrypt");
+        AES128Util cyper = new AES128Util(AES128Util.getLocalMacAddress());
+        String encrypt = cyper.encrypt(data);
 
-        for (String line : data.split("\r\n")) {
-            bw.println(line);
-        }
+        bw.println(encrypt);
+
         closed();
     }
     public void setData(String data,String dir) {
 
+
         access_file(dir);
-        for (String line : data.split("\r\n")) {
-            bw.println(line);
-        }
+        System.out.println(data);
+        System.out.println("after encrypt");
+        AES128Util cyper = new AES128Util(AES128Util.getLocalMacAddress());
+        String encrypt = cyper.encrypt(data);
+
+        bw.println(encrypt);
+
         closed();
     }
+
+    /*
+    System.out.println(sb);
+            System.out.println("after encrypt");
+            AES128Util cyper = new AES128Util(AES128Util.getLocalMacAddress());
+            String encrypt = cyper.encrypt(sb.toString());
+     */
 
 
     private void closed(){
