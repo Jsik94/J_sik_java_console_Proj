@@ -16,74 +16,44 @@ public class Academy implements CodeInfo {
 
      */
     final static private String TITLE = "Academy";
-    final static private int[] MENUOPTS = new int[]{1, 2, 3, 4, 5, 6, 9};
+    final static private int[] MENUOPTS = new int[]{1, 2, 3, 4, 5, 6,7, 9};
     Map<String, ArrayList<Person>> database;
 
     InputClass inputClass;
+    ThreadManage tm =null;
+    DataTempSaver dts = null;
+    MusicOpening mp =null;
 
     public Academy() {
-        database = new HashMap<>();
-        /*
-            기본적으로 돌아가야할 것
-            Address data를 관리하는 입출력 데이터 메모리에 올려둘 것
-            로그용 스레드 실행하고 입력시 마다 로그를 만들어 낼 것.
-         */
 
     }
 
-    public Academy(int forTest) {
+    public Academy(boolean isdebug) {
 
-        System.out.println("<-------------- FOR DEBUG ----------------->");
-        System.out.println("Academy Constructor For Debug");
-        System.out.println("Prepare to turn on Debug Log...");
-        ThreadManage tm = ThreadManage.getUniqueInstance();
 
-        tm.addAction(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                }
-                System.out.println("끝3!");
-            }
-        });
+        if (isdebug){
+            System.out.println("<-------------- FOR DEBUG ----------------->");
+            System.out.println("Academy Constructor For Debug");
+            System.out.println("Prepare to turn on Debug Log...");
 
-        tm.addAction(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(7000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("끝2!");
-            }
-        });
-        tm.addAction(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(8000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                System.out.println("끝!");
-            }
-        });
+        }
+
+
+        MyLog.setStatus(true);
+        this.database = new HashMap<>();
+        MyUtil.connectDataBase(TITLE, database);
+        tm = ThreadManage.getUniqueInstance();
+        new DataTempSaver(tm,database);
+        new MusicOpening(tm);
         tm.runALL();
         tm.showCurrentThead();
-        MyLog.setStatus(true);
-        FileReaderClass frc = FileReaderClass.getInstance();
-        String[] data = frc.toStringLine();
-        this.database = new HashMap<>();
-        connectDataBase(database);
-        if(database.size()==0){
-
+        if(database.size()==0 && isdebug){
+            MyLog.d(TITLE,"Load data doesn't exist.");
+            MyLog.d(TITLE,"Create date for debug.");
             DataGenerator dg = new DataGenerator(database);
             dg.gen(100);
         }
-        MyLog.setStatus(false);
+//        MyLog.setStatus(false);
 
     }
 
@@ -148,77 +118,24 @@ public class Academy implements CodeInfo {
 
                             확인시 noti로 3개다 한번에 뿌려주자
                      */
-
+                    break;
                 case MAIN_EXIT:
                     switch_toggle = false;
                     break;
 
 
             }
-            request_code = spliter.run();
+            if (switch_toggle)
+                request_code = spliter.run();
         }
 
 
 
         System.out.println("종료되었습니다.");
-
+        MyLog.d(TITLE,"App OFF");
     }
 
-    private void connectDataBase(Map<String, ArrayList<Person>> database) {
-        MyLog.d(TITLE, "Loading data in Memory...");
-        String[] datas = FileReaderClass.getInstance().toStringLine();
-        Person one;
-        try {
 
-            for (String data : datas) {
-                StringTokenizer stk = new StringTokenizer(data, "\t");
-                if (stk.nextToken().equals("Student")) {
-                    String name = stk.nextToken().trim();
-                    String age = stk.nextToken().trim();
-                    String strNum = stk.nextToken().trim();
-                    String tel = stk.nextToken().trim();
-                    String addr = stk.nextToken().trim();
-                    String email = stk.nextToken().trim();
-                    one = new Student.StudentBuilder(Integer.parseInt(age), name, strNum)
-                            .setTel(tel)
-                            .setAddr(addr)
-                            .setEmail(email)
-                            .build();
-
-                } else {
-                    String name = stk.nextToken().trim();
-                    String age = stk.nextToken().trim();
-                    String sub = stk.nextToken().trim();
-                    String tel = stk.nextToken().trim();
-                    String addr = stk.nextToken().trim();
-                    String email = stk.nextToken().trim();
-                    one = new Teacher.TeacherBuilder(Integer.parseInt(age), name, sub)
-                            .setTel(tel)
-                            .setAddr(addr)
-                            .setEmail(email)
-                            .build();
-
-                }
-                String tag = MyUtil.getTag(one.getName());
-
-                if (database.get(tag) == null) {
-
-                    database.put(tag, new ArrayList<Person>());
-                }
-                database.get(tag).add(one);
-
-            }
-        } catch (NoSuchElementException e) {
-            MyLog.e(TITLE, "Fail to load data :" + e.getMessage());
-            return;
-        } catch (NumberFormatException e) {
-            MyLog.e(TITLE, "Fail to load data :" + e.getMessage());
-            return;
-        }
-
-        MyLog.d(TITLE, "Complete to load data !");
-
-    }
 
 
 }

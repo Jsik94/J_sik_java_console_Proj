@@ -1,29 +1,23 @@
 package academy;
 
-import academy.crypto.AES128Util;
-
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class FileReaderClass implements DirectoryInfo{
 
     static private volatile FileReaderClass uniqueInstance;
     final static private String TITLE = "FILE_READER_CLASS";
-    final static private String DIR_DEFUALT = "src/academy/datas/Address.txt";
+    final static private String DEFAULT = DIR_DEFUALT + "Address.txt";
     private boolean showLog = true;
     private StringBuilder sb;
 
-    private FileReaderClass(String dir){
-        access_file(dir);
-        showLog =false;
-    }
+
 
     private FileReaderClass(){
         //defualt Address database
-        access_file(DIR_DEFUALT);
+        access_file(DEFAULT);
 
     }
+
 
     private void access_file(String dir) {
         clearBuffer();
@@ -71,6 +65,9 @@ public class FileReaderClass implements DirectoryInfo{
 //        System.out.println(output);
 //        if (output==null) return sb.toString();
 //        return output;
+
+
+
 
         return sb.toString();
     }

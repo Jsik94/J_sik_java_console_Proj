@@ -7,7 +7,7 @@ public class Simulator {
 
         Academy test ;
 
-        test = new Academy(12);
+        test = new Academy(true);
         test.run();
     }
 

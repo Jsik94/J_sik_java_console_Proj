@@ -1,19 +1,17 @@
 package academy;
 
-import academy.crypto.AES128Util;
-
 import java.io.*;
 
 public class FileWriterClass implements DirectoryInfo{
     final static private String TITLE="FILE_WRITER_CLASS";
-    final static private String DIR_DEFAULT = "src/academy/datas/Address.txt";
+    final static private String DEFAULT = DIR_DEFUALT+ "Address.txt";
     private boolean appendOps = false;
     private boolean showLog = true;
     PrintWriter bw = null;
 
 
     public FileWriterClass(){
-        this(DIR_DEFAULT);
+        this(DEFAULT);
     }
 
     public FileWriterClass(String dir) {
@@ -26,7 +24,6 @@ public class FileWriterClass implements DirectoryInfo{
     }
 
     private void access_file(String dir) {
-
         MyLog.d(TITLE,"Try to Access : " + dir);
         try {
             bw = new PrintWriter(new FileWriter(dir,false));
@@ -45,6 +42,15 @@ public class FileWriterClass implements DirectoryInfo{
 //        AES128Util crypto = new AES128Util(AES128Util.getLocalMacAddress());
 //        String trans = crypto.encrypt(data);
 //        System.out.println(trans);
+
+        for (String line : data.split("\r\n")) {
+            bw.println(line);
+        }
+        closed();
+    }
+    public void setData(String data,String dir) {
+
+        access_file(dir);
         for (String line : data.split("\r\n")) {
             bw.println(line);
         }

@@ -101,13 +101,13 @@ public class DataGenerator {
     }
 
     public DataGenerator(Map<String, ArrayList<Person>> database) {
-        MyLog.d("DataGenerator","데이터 생성용 클래스 실행");
+        MyLog.d("DataGenerator","Construct Class");
 
         this.database = database;
     }
 
     public void gen(int num){
-        MyLog.d("DataGenerator","데이터 " +num+"개 생성 시작");
+        MyLog.d("DataGenerator","Prepare to create records for Debug  cnt : " +num );
         for (int i = 0 ; i < num/10*9;i++){
             Student one = getMakeStudent();
             String tag = MyUtil.getTag(one.getName());
@@ -129,7 +129,7 @@ public class DataGenerator {
             database.get(tag).add(one);
         }
 
-        MyLog.d("DataGenerator","데이터 " +num+"개 생성 완료");
+        MyLog.d("DataGenerator",num+"records Created ! ");
     }
 
 }

@@ -7,7 +7,9 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.security.Key;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 
 public class AES128Util {
     private String ips;
@@ -79,6 +81,8 @@ public class AES128Util {
 
         return result;
     }
+
+
 
 //    public static void main(String[] args) {
 //

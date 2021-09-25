@@ -3,47 +3,57 @@ package academy;
 import java.util.*;
 
 public class ThreadManage implements Subject{
-
+    private final static String TITLE = "TheadManage";
     private volatile static ThreadManage uniqueInstance;
 
-    //    HashMap<String,List<Runnable>>
-    List<Runnable> myThreadSet = null;
+    List<Observer> myThreadSet = null;
 
     private ThreadManage() {
         myThreadSet = new ArrayList<>();
     }
 
     public void showCurrentThead() {
+
+        MyLog.d(TITLE,"Searching same group thread.....  Group name - MyThread");
         System.out.println(Thread.currentThread());
         Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
-
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
         for (Thread thread : map.keySet()) {
             if (!thread.getThreadGroup().getName().equals("MyThread")) continue;
-            System.out.println("Name : " + thread.getName() + ((thread.isDaemon()) ? "[Daemon]" : "[Main]"));
-            System.out.println("\t" + "Group : " + thread.getThreadGroup().getName());
-            System.out.println("\t\t" + "ID : " + thread.getId());
-            System.out.println();
-
+            sb.append("Name : " + thread.getName() + ((thread.isDaemon()) ? "[Daemon]" : "[Main]")).append("\n");
+            sb.append("\t" + "Group : " + thread.getThreadGroup().getName()).append("\n");
+            sb.append("\t\t" + "ID : " + thread.getId()).append("\n");
+            sb.append("\t\t\t" + "State : " + thread.getState()).append("\n");
 
         }
+        MyLog.d(TITLE,"Thread is found.");
+        MyLog.d(TITLE,sb.toString());
 
-        ThreadGroup rootGroup = Thread.currentThread().getThreadGroup();
-        ThreadGroup parentsGroup;
+//        ThreadGroup rootGroup = Thread.currentThread().getThreadGroup();
+//        ThreadGroup parentsGroup;
 
 
+    }
+
+    public List<Observer> getMyThreadSet() {
+        return myThreadSet;
     }
 
     public Thread getThread(String name){
         Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
 
+        MyLog.d(TITLE,"Searching Thead..... target thread name - " + name);
         for (Thread thread : map.keySet()) {
             if (!thread.getThreadGroup().getName().equals("MyThread")) continue;
             if (thread.getName().equals(name)) {
 
+                MyLog.d(TITLE,"Thread is found  : " + name);
                 return thread;
             }
         }
 
+        MyLog.d(TITLE,"No exist");
         return null;
     }
 
@@ -76,16 +86,17 @@ public class ThreadManage implements Subject{
 
 
     public void runALL() {
-        int i = 1111;
-        for (Runnable one : myThreadSet) {
-            Thread a = new Thread(new ThreadGroup("MyThread"), one, Integer.toString(i++));
+        MyLog.d(TITLE,"Run all Observers... Count : " + myThreadSet.size());
+        for (Observer one : myThreadSet) {
+            Thread a = new Thread(new ThreadGroup("MyThread"), one, one.getName());
+            a.setDaemon(one.getDaemon());
             a.start();
         }
     }
 
-    public void addAction(Runnable object) {
-        myThreadSet.add(object);
-    }
+//    public void addAction(Observer object) {
+//        myThreadSet.add(object);
+//    }
 
     public static ThreadManage getUniqueInstance() {
         if (uniqueInstance == null) {
@@ -103,16 +114,19 @@ public class ThreadManage implements Subject{
     @Override
     public void addObserver(Observer o) {
         myThreadSet.add(o);
+        MyLog.d(TITLE,"CREATE THREAD " + o.getName());
     }
 
     @Override
     public void removeObserver(Observer o) {
         myThreadSet.remove(o);
+        Thread a = getThread(o.getName());
+        a.interrupt();
+        MyLog.d(TITLE,"DELETE THREAD " + o.getName());
     }
 
     @Override
     public void notifyObservers() {
-
     }
 
 

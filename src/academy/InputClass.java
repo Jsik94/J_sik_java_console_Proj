@@ -8,6 +8,7 @@ public class InputClass {
     Scanner sc;
     boolean filter_addr = false;
     boolean filter_email = false;
+    private static MusicEnterEffect effect = null;
 
     /*
 
@@ -20,6 +21,18 @@ public class InputClass {
 
     public InputClass(String title) {
         this.title = title;
+        setEffect();
+
+    }
+
+    public static MusicEnterEffect getEffect() {
+        return effect;
+    }
+
+
+
+    public static void setEffect() {
+        effect = MusicEnterEffect.getInstance();
     }
 
     public int getMenuInput(int[] menuOpts) {
@@ -50,7 +63,7 @@ public class InputClass {
             break;
         }
 
-        MyLog.d(title,"Return user input : " + result);
+        //MyLog.d(title,"Return user input : " + result);
         return result;
     }
 
@@ -59,6 +72,7 @@ public class InputClass {
     public String getString() {
         MyLog.d(title,"Prepare to get User input... String Type");
         sc = new Scanner(System.in);
+        new Thread(effect).start();
         String data = null;
         while (true) {
             data = sc.nextLine().trim();
@@ -97,6 +111,7 @@ public class InputClass {
 
         while (true) {
             String data = sc.nextLine().trim();
+            new Thread(effect).start();
             if (!MyUtil.isNumber(data)) {
                 System.out.println("올바른 입력이 아닙니다. 숫자를 입력하십시오.");
                 continue;
@@ -110,6 +125,7 @@ public class InputClass {
 
     public String getOrigin(){
         sc = new Scanner(System.in);
+        new Thread(effect).start();
         String data = sc.nextLine().trim();
         /*
             나중에 로그처리 여기서 하면 될듯
@@ -124,6 +140,7 @@ public class InputClass {
         while(true){
             try {
                 data=System.in.read();
+                new Thread(effect).start();
                 if(Character.toUpperCase(((char)data))=='Y'){
                     MyLog.d(title,"Return True");
                     return true;

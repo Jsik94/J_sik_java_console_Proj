@@ -153,6 +153,11 @@
             <PaintGroupHighlightMap />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/academy/LogFileWriter.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/academy/MainNaviDisplay.java">
           <value>
             <PaintGroupHighlightMap />
@@ -174,6 +179,26 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/academy/ModifyNavigator.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/MusicEnterEffect.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/MusicInterface.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/MusicOpening.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/MusicOpenning.java">
           <value>
             <PaintGroupHighlightMap />
           </value>
@@ -318,6 +343,21 @@
             <PaintGroupHighlightMap />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/src/academy/crypto/TestReader.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/crypto/TestWriter.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/crypto/myTest.txt">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/src/academy/databaseInf/DataBase.java">
           <value>
             <PaintGroupHighlightMap />
@@ -339,6 +379,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/src/academy/logs/Insert.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/music/MyPlayer.java">
+          <value>
+            <PaintGroupHighlightMap />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/src/academy/music/SampleData.java">
           <value>
             <PaintGroupHighlightMap />
           </value>

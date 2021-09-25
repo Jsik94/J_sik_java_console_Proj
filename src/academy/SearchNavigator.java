@@ -10,7 +10,7 @@ public class SearchNavigator implements Actionable, CodeInfo {
     final static private String TITLE = "검색";
     final static private int[] MENUOPTS ={1,2,3,4,5};
     final static private int WEIGHT = 400;
-    final static private int GOBACK = 5;
+    final static private int GOBACK = 405;
 
     public SearchNavigator(Map<String,ArrayList<Person>> database) {
         this.database = database;

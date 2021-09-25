@@ -22,9 +22,9 @@ public class SaveData extends FileWriterClass implements Actionable{
             return CodeInfo.CURRENT;
         }
 
-        setData(makeDataFormat());
+        setData(MyUtil.makeDataFormat(database));
 
-        return 0;
+        return CodeInfo.COMPLETE;
     }
 
 
@@ -34,31 +34,7 @@ public class SaveData extends FileWriterClass implements Actionable{
         System.out.println("데이터를 저장하시겠습니까 ? ");
     }
 
-    public String makeDataFormat(){
-        StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String,ArrayList<Person>> entries : database.entrySet()){
-            for (Person one : entries.getValue()){
-                if( one instanceof Student){
-                    sb.append("Student\t")
-                            .append(one.getName()+"\t")
-                            .append(one.getAge()+"\t")
-                            .append(String.format("%-10s",((Student) one).getStrNumber())+"\t\t");
 
-                }else{
-                    sb.append("Teacher\t")
-                            .append(one.getName()+"\t")
-                            .append(one.getAge()+"\t")
-                            .append(String.format("%-10s",((Teacher) one).getSubject())+"\t");
-                }
-                sb.append(one.getTel()+"\t")
-                        .append(String.format("%-30s",one.getAddr())+"\t")
-                        .append(one.getEmail()+"\t")
-                        .append("\r\n");
-            }
-        }
-        System.out.println(sb);
-        return sb.toString();
-    }
 
 
 
