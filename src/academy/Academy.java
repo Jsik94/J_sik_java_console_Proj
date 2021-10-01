@@ -53,6 +53,37 @@ public class Academy implements CodeInfo ,DisplayInterface{
         }
         MyLog.setStatus(false);
 
+        Thread test = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+
+                    System.out.println(Thread.currentThread());
+                    Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("\n");
+                    for (Thread thread : map.keySet()) {
+                        if (!thread.getThreadGroup().getName().equals("MyThread")) continue;
+                        sb.append("Name : " + thread.getName() + ((thread.isDaemon()) ? "[Daemon]" : "[Main]")).append("\n");
+                        sb.append("\t" + "Group : " + thread.getThreadGroup().getName()).append("\n");
+                        sb.append("\t\t" + "ID : " + thread.getId()).append("\n");
+                        sb.append("\t\t\t" + "State : " + thread.getState()).append("\n");
+
+                    }
+                    System.out.println(sb);
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        });
+
+        //test.start();
+
     }
 
 
@@ -79,6 +110,7 @@ public class Academy implements CodeInfo ,DisplayInterface{
             //factory로 띄어낼지 말지는 좀 결정하자.
             switch (result) {
                 case MAIN_INSERT:
+
                     spliter = new InsertNavigator(database);
 //                    request_code = spliter.run();
                     break;

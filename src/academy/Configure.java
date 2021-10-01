@@ -9,6 +9,9 @@ public class Configure implements Actionable ,CodeInfo{
     private final static int[] MENUOPTS = {1,2,3,4,5};
     private final static String Title = "Configure";
     private final static int WEIGHT = 600;
+    private boolean thread_TempSaver ;
+    private boolean thread_MusicOpening ;
+
     InputClass ip = null;
 
     /*
@@ -47,13 +50,21 @@ public class Configure implements Actionable ,CodeInfo{
             System.out.println("해당 번호를 누르시면 설정이 변경됩니다.");
             int result = ip.getMenuInput(MENUOPTS)+WEIGHT;
             ThreadManage tm = ThreadManage.getUniqueInstance();
-
+            tm.showCurrentThead();
             switch (result){
                 case CONFIGURE_TEMPSAVER:
-                    tm.stopThread("TempSaver");
+                    if(tm.getThread("TempSaver")!=null){
+                        tm.stopThread("TempSaver");
+                    }else{
+                        tm.runOne("TempSaver");
+                    }
                     break;
                 case CONFIGURE_MUSIC:
-                    tm.stopThread("MusicEnterEffect");
+                    if(tm.getThread("MusicEnterEffect")!=null){
+                        tm.stopThread("MusicEnterEffect");
+                    }else{
+                        tm.runOne("MusicEnterEffect");
+                    }
                     break;
                 case CONFIGURE_LOG:
                     MyLog.setStatus(!MyLog.getStatus());
@@ -85,6 +96,7 @@ public class Configure implements Actionable ,CodeInfo{
         System.out.println("=============\tCurrent Configuration\t=============");
         status();
         System.out.println("=============================================");
+
     }
 
 
@@ -97,8 +109,14 @@ public class Configure implements Actionable ,CodeInfo{
         int i = 1;
         for (Observer obs : lst){
 //            System.out.println(obs.getName());
-            String tmp = tm.getThread(obs.getName()).getState().toString();
-            sb.append( i+++") "+obs.getName()+ " : " + (tmp.equals(status_waiting) ? "On" : "Off")).append("\n");
+            try {
+
+                String tmp = tm.getThread(obs.getName()).getState().toString();
+                sb.append( i+++") "+obs.getName()+ " : " + (tmp.equals(status_waiting) ? "On" : "Off")).append("\n");
+            }catch (NullPointerException e){
+                sb.append( i+++") "+obs.getName()+ " : " + "Off").append("\n");
+                MyLog.e(Title,e.getMessage());
+            }
         }
         sb.append(i+++") " + "Show Log :" + (MyLog.getStatus() ?  "On" : "Off") ).append("\n");
         sb.append(i+++") " + "EnterEffect :" + (effect.getStatus() ?  "On" : "Off") ).append("\n");

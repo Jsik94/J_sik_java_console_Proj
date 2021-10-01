@@ -30,7 +30,7 @@ public class MusicOpening implements MusicInterface,Observer {
                 clip = AudioSystem.getClip();
                 clip.open(audioInputStream);
                 clip.start();
-                Thread.sleep(clip.getMicrosecondLength());
+                Thread.sleep(96000);
                 MyLog.d(TITLE,"Music End");
             }else {
                 MyLog.e(TITLE,"Music does not exist");

@@ -83,6 +83,16 @@ public class ThreadManage implements Subject{
         return false;
     }
 
+    public void runOne(String name){
+        for (Observer one : myThreadSet){
+            if (one.getName().equals(name)){
+                Thread a = new Thread(new ThreadGroup("MyThread"), one, one.getName());
+                a.setDaemon(one.getDaemon());
+                a.start();
+            }
+        }
+
+    }
 
     public void runALL() {
         MyLog.d(TITLE,"Run all Observers... Count : " + myThreadSet.size());
@@ -93,9 +103,7 @@ public class ThreadManage implements Subject{
         }
     }
 
-//    public void addAction(Observer object) {
-//        myThreadSet.add(object);
-//    }
+
 
     public static ThreadManage getUniqueInstance() {
         if (uniqueInstance == null) {

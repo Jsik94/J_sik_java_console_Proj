@@ -1,5 +1,6 @@
 package academy;
 
+
 public class Simulator {
 
 
@@ -7,8 +8,11 @@ public class Simulator {
 
         Academy test ;
 
+
         test = new Academy(true);
         test.run();
+
+
     }
 
 
