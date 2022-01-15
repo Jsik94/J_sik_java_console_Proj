@@ -16,6 +16,8 @@
 
 ### 자료
 
+[발표자료](https://github.com/ychic/J_sik_java_console_Proj/commit/4f896423d3a4bc879c98525f560f375701ee08c9)
+
 
 ### Contact
 
