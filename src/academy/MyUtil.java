@@ -1,5 +1,10 @@
 package academy;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
+
 public class MyUtil {
 
     final static private int KOR_CHAR = 2;
@@ -12,6 +17,9 @@ public class MyUtil {
 
     }
 
+    //static method
+
+    //confirm number
     static boolean isNumber(String value) {
         for (int i = 0; i < value.length(); i++) {
             if (!(value.codePointAt(i) >= '0' && value.codePointAt(i) <= '9'))
@@ -61,6 +69,7 @@ public class MyUtil {
         return false;
     }
 
+    //return 1st letter
     public static String getTag(String name) {
         //김길동->ㄱ,박길동->ㅂ,홍길동->ㅎ
         char[] jaeum = name.trim().toCharArray();
@@ -78,4 +87,90 @@ public class MyUtil {
         return null;
     }
 
+
+    public static String makeDataFormat(Map<String, ArrayList<Person>> database){
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, ArrayList<Person>> entries : database.entrySet()){
+            for (Person one : entries.getValue()){
+                if( one instanceof Student){
+                    sb.append("Student\t")
+                            .append(one.getName()+"\t")
+                            .append(one.getAge()+"\t")
+                            .append(String.format("%-10s",((Student) one).getStrNumber())+"\t\t");
+
+                }else{
+                    sb.append("Teacher\t")
+                            .append(one.getName()+"\t")
+                            .append(one.getAge()+"\t")
+                            .append(String.format("%-10s",((Teacher) one).getSubject())+"\t");
+                }
+                sb.append(one.getTel()+"\t")
+                        .append(String.format("%-30s",one.getAddr())+"\t")
+                        .append(one.getEmail()+"\t")
+                        .append("\r\n");
+            }
+        }
+        //System.out.println(sb);
+        return sb.toString();
+    }
+
+    public static void connectDataBase(String TITLE, Map<String, ArrayList<Person>> database) {
+        MyLog.d(TITLE, "Loading data in Memory...");
+
+
+        Person one;
+        try {
+            String[] datas = FileReaderClass.getInstance().toStringLine();
+            for (String data : datas) {
+                StringTokenizer stk = new StringTokenizer(data, "\t");
+                if (stk.nextToken().equals("Student")) {
+                    String name = stk.nextToken().trim();
+                    String age = stk.nextToken().trim();
+                    String strNum = stk.nextToken().trim();
+                    String tel = stk.nextToken().trim();
+                    String addr = stk.nextToken().trim();
+                    String email = stk.nextToken().trim();
+                    one = new Student.StudentBuilder(Integer.parseInt(age), name, strNum)
+                            .setTel(tel)
+                            .setAddr(addr)
+                            .setEmail(email)
+                            .build();
+
+                } else {
+                    String name = stk.nextToken().trim();
+                    String age = stk.nextToken().trim();
+                    String sub = stk.nextToken().trim();
+                    String tel = stk.nextToken().trim();
+                    String addr = stk.nextToken().trim();
+                    String email = stk.nextToken().trim();
+                    one = new Teacher.TeacherBuilder(Integer.parseInt(age), name, sub)
+                            .setTel(tel)
+                            .setAddr(addr)
+                            .setEmail(email)
+                            .build();
+
+                }
+                String tag = MyUtil.getTag(one.getName());
+
+                if (database.get(tag) == null) {
+
+                    database.put(tag, new ArrayList<Person>());
+                }
+                database.get(tag).add(one);
+
+            }
+        }catch (NullPointerException e) {
+            MyLog.e(TITLE, "Fail to load data :" + e.getMessage());
+
+        }catch (NoSuchElementException e) {
+            MyLog.e(TITLE, "Fail to load data :" + e.getMessage());
+            return;
+        } catch (NumberFormatException e) {
+            MyLog.e(TITLE, "Fail to load data :" + e.getMessage());
+            return;
+        }
+
+        MyLog.d(TITLE, "Complete to load data !");
+
+    }
 }

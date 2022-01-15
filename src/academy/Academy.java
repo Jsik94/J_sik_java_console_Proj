@@ -1,127 +1,181 @@
 package academy;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import academy.datas.DataGenerator;
 
-public class Academy implements CodeInfo {
+import java.util.*;
+
+public class Academy implements CodeInfo ,DisplayInterface{
+
     /*
-          Academy 객체
 
-            사용 목적
-            -> 필요 자원 적재
-            -> 프로그램 사용 흐름제어
+    행동을 나눌 필요가 있음
+    클래스명 싹다 변경할 것
+    Switch로 흐름 제어만하고 결과만 출력하는 클래스들 [이름]Navigator implement Action
 
-            constructor  | param -> FileReader 사용여부, test 모드인지 ,
-                필요한 자원 미리 적재
-
-            field
-
-
-            method
-                run
+    네비게이터에서 값을 받아 해당 일들을 행동하고 반환하는 클래스들 [이름]Activity
 
      */
-
-//    //singletone design
-//    private static Academy uniqueInstance = null;
-//    //singletone design
-//    private Academy getInstance(){
-//        if(uniqueInstance==null){
-//            synchronized (Academy.class){
-//                if(uniqueInstance ==null){
-//                    uniqueInstance = new Academy();
-//                }
-//            }
-//        }
-//        return uniqueInstance;
-//    }
-
-    //Field
-//    final static private int MOVE_INSERT = 1;
-//    final static private int MOVE_PRINTOUT = 2;
-//    final static private int MOVE_MODIFY = 3;
-//    final static private int MOVE_DELETE = 4;
-//    final static private int MOVE_SEARCH = 5;
-//    final static private int MOVE_EXIT = 999;
-//    final static private int MOVE_FIRST = 998;
-
-    Map<String,ArrayList<Person>> database ;
+    final static private String TITLE = "Academy";
+    final static private int[] MENUOPTS = new int[]{1, 2, 3, 4, 5, 6,7, 9};
+    Map<String, ArrayList<Person>> database;
 
     InputClass inputClass;
+    ThreadManage tm =null;
+    DataTempSaver dts = null;
+    MusicOpening mp =null;
 
-    public Academy() {
-        database = new HashMap<>();
-    }
-    public Academy(int forTest) {
 
-        System.out.println("<-------------- FOR DEBUG ----------------->");
-        System.out.println("Constructor For Debug");
-        this.database =new HashMap<>();
 
-        database.put("ㅈ",new ArrayList<>());
-        database.get("ㅈ").add(new Student.StudentBuilder(21,"정다식","23232").build());
-        database.get("ㅈ").add(new Student.StudentBuilder(23,"정나식","23233").build());
-        database.get("ㅈ").add(new Student.StudentBuilder(22,"정라식","23234").build());
-        database.get("ㅈ").add(new Teacher.TeacherBuilder(29,"정카식","수학").build());
-        database.get("ㅈ").add(new Teacher.TeacherBuilder(32,"정과식","기하학").build());
-        database.get("ㅈ").add(new Teacher.TeacherBuilder(42,"정구식","영어").build());
+    public Academy(boolean isdebug) {
 
+
+        if (isdebug){
+            System.out.println("<-------------- FOR DEBUG ----------------->");
+            System.out.println("Academy Constructor For Debug");
+            System.out.println("Prepare to turn on Debug Log...");
+
+        }
+
+
+        MyLog.setStatus(true);
+        this.database = new HashMap<>();
+        MyUtil.connectDataBase(TITLE, database);
+        tm = ThreadManage.getUniqueInstance();
+        dts = new DataTempSaver(tm,database);
+        new MusicOpening(tm);
+        tm.runALL();
+        tm.showCurrentThead();
+        if(database.size()==0 && isdebug){
+            MyLog.d(TITLE,"Load data doesn't exist.");
+            MyLog.d(TITLE,"Create date for debug.");
+            DataGenerator dg = new DataGenerator(database);
+            dg.gen(100);
+        }
+        MyLog.setStatus(false);
+
+        Thread test = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true){
+
+                    System.out.println(Thread.currentThread());
+                    Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
+                    StringBuilder sb = new StringBuilder();
+                    sb.append("\n");
+                    for (Thread thread : map.keySet()) {
+                        if (!thread.getThreadGroup().getName().equals("MyThread")) continue;
+                        sb.append("Name : " + thread.getName() + ((thread.isDaemon()) ? "[Daemon]" : "[Main]")).append("\n");
+                        sb.append("\t" + "Group : " + thread.getThreadGroup().getName()).append("\n");
+                        sb.append("\t\t" + "ID : " + thread.getId()).append("\n");
+                        sb.append("\t\t\t" + "State : " + thread.getState()).append("\n");
+
+                    }
+                    System.out.println(sb);
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+            }
+        });
+
+        //test.start();
 
     }
 
 
     public void run() {
 
-        boolean switch_toggle = true;
 
+
+
+        boolean switch_toggle = true;
 
         while (switch_toggle) {
             //네비게이션 화면 출력
-            ShowMainTemporary.getshow();
+            show();
             //입력 값
-            inputClass = new InputClass();
-            int[] menuOps = new int[]{1, 2, 3, 4, 5, 9};
-            int result = inputClass.getMainMenuInput(menuOps);
+            inputClass = new InputClass(TITLE);
 
-            Actionable spliter =null;
+            int result = inputClass.getMenuInput(MENUOPTS);
 
-            //입력값에 따른 흐름 분기
+            Actionable spliter = null;
+
+            //입력값에 따른 흐름 분기 나중에 사용
             int request_code;
 
-
+            //factory로 띄어낼지 말지는 좀 결정하자.
             switch (result) {
                 case MAIN_INSERT:
-                    spliter = new InserMenutClass(database);
-                    request_code = spliter.run();
+
+                    spliter = new InsertNavigator(database);
+//                    request_code = spliter.run();
                     break;
                 case MAIN_PRINTOUT:
-                    spliter = new PrintOutClass(database);
-                    request_code = spliter.run();
+                    spliter = new PrintOutNavigator(database);
+//                    request_code = spliter.run();
                     break;
                 case MAIN_MODIFY:
-                    spliter = new ModifyInfoClass(database);
-                    request_code = spliter.run();
+                    spliter = new ModifyNavigator(database);
+//                    request_code = spliter.run();
                     break;
                 case MAIN_DELETE:
-                    spliter = new DeleteClass(database);
-                    request_code = spliter.run();
+                    spliter = new DeleteNavigator(database);
+//                    request_code = spliter.run();
                     break;
+
                 case MAIN_SEARCH:
-                    spliter = new SearchClass(database);
-                    request_code = spliter.run();
+                    spliter = new SearchNavigator(database);
+//                    request_code = spliter.run();
+                    break;
+
+                case MAIN_SAVE:
+                    spliter = new SaveData(database);
+//                    request_code = spliter.run();
+                    break;
+
+
+                case MAIN_SETTING:
+                    spliter = new Configure();
+                    /*
+                            셋팅하나만 만들자
+                            1. 입력에 대한 로그 설정
+                            2. debug ,error 로그 설정
+                            3. 자동 저장 설정 (Thread 이용)
+
+                            확인시 noti로 3개다 한번에 뿌려주자
+                     */
                     break;
                 case MAIN_EXIT:
                     switch_toggle = false;
                     break;
 
-            }
 
+            }
+            if (switch_toggle)
+                request_code = spliter.run();
         }
 
-        System.out.println("종료되었습니다.");
 
+
+        MyLog.d(TITLE,"App OFF");
+        System.out.println("종료되었습니다.");
+        System.exit(0);
     }
+
+    @Override
+    public void show(){
+        System.out.println("=============\t기본 메뉴 설정\t=============");
+        System.out.println("=\t\t\t\t\t\t\t\t\t\t\t=");
+        System.out.println("=\t1.입력 2.출력 3.수정 4.삭제 5.검색 9.종료\t=");
+        System.out.println("=\t6.파일저장\t7.설정\t\t\t\t\t\t=");
+        System.out.println("=\t\t\t\t\t\t\t\t\t\t\t=");
+        System.out.println("=============================================");
+    }
+
 
 
 }

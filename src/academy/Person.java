@@ -8,9 +8,17 @@ public class Person {
     private int age;
     private String name;
     private String addr;
-
     private String tel;
     private String email;
+
+
+    public String[] getColumsInfo(){
+        String[] cols = new String[]{"나이","이름","주소","전화번호","e-mail"};
+
+        return cols;
+    }
+
+
 
     public Person(int age, String name, String addr, String tel, String email) {
         this.age = age;
@@ -22,6 +30,26 @@ public class Person {
 
     public int getInfo_cnt() {
         return info_cnt;
+    }
+
+    public boolean contains(String target){
+        if(name.equals(target)){
+            return true;
+        }else if(addr.equals(target)){
+            return true;
+        }else if(tel.equals(target)){
+            return true;
+        }else if(email.equals(target)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean contains(int target){
+        if(age==target){
+            return true;
+        }
+        return false;
     }
 
     public String getTel() {
@@ -44,4 +72,7 @@ public class Person {
     public String getAddr() {
         return addr;
     }
+
+
+
 }
